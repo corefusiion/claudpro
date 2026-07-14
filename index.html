@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automatización Cinematográfica Universal con IA | Rourke Heath</title>
+  <meta name="description" content="Una carpeta convierte a Claude en un estudio de producción cinematográfica. El sistema de automatización de IA más completo para creadores visuales.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --green: #37ca37;
+      --cyan: #00e5c0;
+      --blue: #188bf6;
+      --red: #e93d3d;
+      --bg: #0e0f0e;
+      --card: #161716;
+      --border: rgba(255,255,255,0.08);
+      --text: #fff;
+      --text2: rgba(255,255,255,0.72);
+      --muted: rgba(255,255,255,0.42);
+      --max: 1100px;
+    }
+    body { font-family:'Inter',sans-serif; background:var(--bg); color:var(--text); -webkit-font-smoothing:antialiased; overflow-x:hidden; }
+    a { text-decoration:none; color:inherit; }
+    img,video { max-width:100%; vertical-align:middle; }
+    .wrap { max-width:var(--max); margin:0 auto; padding:0 24px; }
+
+    /* NAV */
+    nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:20px 40px; background:rgba(14,15,14,.88); backdrop-filter:blur(20px); border-bottom:1px solid rgba(255,255,255,.04); transition:all .3s; }
+    nav.scrolled { padding:12px 40px; box-shadow:0 4px 30px rgba(0,0,0,.5); }
+    .nav-logo { font-size:17px; font-weight:800; }
+    .nav-logo span { color:var(--green); }
+    .btn-green { background:var(--green); color:#000; padding:10px 22px; border-radius:100px; font-weight:800; font-size:14px; display:inline-block; transition:all .2s; border:none; cursor:pointer; }
+    .btn-green:hover { background:#4ddd4d; transform:translateY(-1px); box-shadow:0 8px 30px rgba(55,202,55,.35); }
+    .btn-green-lg { padding:15px 36px; font-size:16px; }
+
+    /* HERO */
+    .hero { min-height:100vh; display:flex; align-items:center; padding:120px 0 80px; position:relative; overflow:hidden; }
+    .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 70% 55% at 65% 45%,rgba(55,202,55,.07) 0%,transparent 65%); pointer-events:none; }
+    .hero-inner { display:grid; grid-template-columns:1fr 1fr; gap:64px; align-items:center; }
+    .badge { display:inline-flex; align-items:center; gap:8px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:100px; padding:6px 14px; font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:rgba(255,255,255,.65); margin-bottom:28px; }
+    .dot { width:6px; height:6px; background:var(--green); border-radius:50%; display:inline-block; box-shadow:0 0 8px var(--green); animation:pulse-dot 2s infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1;box-shadow:0 0 8px var(--green)} 50%{opacity:.5;box-shadow:0 0 20px var(--green)} }
+    h1 { font-size:clamp(44px,5.8vw,76px); font-weight:900; letter-spacing:-.045em; line-height:1; color:#fff; margin-bottom:28px; }
+    .grad { background:linear-gradient(135deg,var(--green) 0%,var(--cyan) 100%); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size:17px; line-height:1.65; color:var(--text2); margin-bottom:36px; max-width:460px; }
+    .cta-row { display:flex; gap:16px; align-items:center; flex-wrap:wrap; }
+    .link-muted { color:rgba(255,255,255,.48); font-size:14px; font-weight:500; transition:color .2s; cursor:pointer; }
+    .link-muted:hover { color:#fff; }
+
+    /* VIDEO CARD */
+    .video-wrap { display:flex; justify-content:center; }
+    .video-card { width:100%; max-width:300px; aspect-ratio:9/16; border-radius:24px; border:1px solid rgba(255,255,255,.1); background:#111; overflow:hidden; box-shadow:0 40px 80px rgba(0,0,0,.7),0 0 60px rgba(55,202,55,.08); }
+    .video-card video { width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* RUNS ON */
+    .runs-on { background:var(--bg); border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:28px 0; }
+    .runs-inner { display:flex; align-items:center; gap:32px; flex-wrap:wrap; justify-content:center; }
+    .runs-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); }
+    .runs-item { font-size:14px; font-weight:600; color:rgba(255,255,255,.55); display:flex; align-items:center; gap:8px; }
+    .runs-item::before { content:'/'; color:var(--muted); }
+
+    /* SECTIONS */
+    section { padding:100px 0; }
+    .sec-divider { border-top:1px solid var(--border); }
+    h2 { font-size:clamp(30px,4.5vw,58px); font-weight:900; letter-spacing:-.04em; line-height:1.05; color:#fff; }
+    .sec-sub { font-size:17px; line-height:1.65; color:var(--text2); }
+
+    /* GALLERY */
+    .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:52px; }
+    .gal-item { border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:var(--card); border:1px solid var(--border); cursor:pointer; transition:transform .3s,border-color .3s; position:relative; }
+    .gal-item:hover { transform:translateY(-4px); border-color:rgba(255,255,255,.15); }
+    .gal-item img, .gal-item video { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+    .gal-item:hover img, .gal-item:hover video { transform:scale(1.04); }
+    .gal-brand { position:absolute; bottom:12px; left:12px; font-size:10.5px; font-weight:800; letter-spacing:2px; color:rgba(255,255,255,.85); text-shadow:0 2px 8px rgba(0,0,0,.7); }
+    .gallery-caption { text-align:center; margin-top:22px; font-size:13px; color:var(--muted); }
+
+    /* PROBLEM */
+    .problem-title { font-size:clamp(34px,5vw,64px); text-align:center; max-width:760px; margin:0 auto 52px; }
+    .prob-list { display:flex; flex-direction:column; gap:12px; max-width:760px; margin:0 auto; }
+    .prob-item { display:flex; align-items:flex-start; gap:16px; background:rgba(255,255,255,.025); border:1px solid rgba(255,255,255,.07); border-radius:12px; padding:22px 24px; transition:all .25s; }
+    .prob-item:hover { background:rgba(255,255,255,.04); border-color:rgba(255,255,255,.12); }
+    .x-icon { width:26px; height:26px; background:rgba(233,61,61,.14); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; font-size:11px; color:#e93d3d; font-weight:700; }
+    .prob-text { font-size:15px; line-height:1.65; color:rgba(255,255,255,.78); }
+    .prob-text strong { color:#fff; }
+    .prob-closing { text-align:center; margin-top:52px; font-size:18px; line-height:1.65; color:rgba(255,255,255,.65); max-width:640px; margin-left:auto; margin-right:auto; }
+    .accent-blue { color:var(--blue); }
+
+    /* PIPELINE */
+    .roles-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .role-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:32px 28px; transition:all .3s; }
+    .role-card:hover { border-color:rgba(55,202,55,.25); background:rgba(55,202,55,.04); }
+    .role-num { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--green); margin-bottom:14px; }
+    .role-name { font-size:22px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-.03em; }
+    .role-desc { font-size:14px; line-height:1.65; color:var(--text2); }
+
+    /* STEPS */
+    .steps-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .step-card { background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:36px 28px; transition:all .3s; }
+    .step-card:hover { border-color:rgba(55,202,55,.25); background:rgba(55,202,55,.04); }
+    .step-big-num { font-size:52px; font-weight:900; letter-spacing:-.05em; line-height:1; color:var(--green); margin-bottom:14px; }
+    .step-title { font-size:20px; font-weight:800; color:#fff; margin-bottom:12px; letter-spacing:-.03em; }
+    .step-desc { font-size:14px; line-height:1.7; color:var(--text2); }
+    code { background:rgba(55,202,55,.12); color:var(--green); padding:2px 7px; border-radius:5px; font-size:12px; font-family:'Courier New',monospace; border:1px solid rgba(55,202,55,.2); }
+
+    /* INCLUDES */
+    .inc-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:14px; margin-top:52px; }
+    .inc-item { display:flex; align-items:flex-start; gap:14px; background:rgba(255,255,255,.025); border:1px solid var(--border); border-radius:12px; padding:22px 20px; transition:all .25s; }
+    .inc-item:hover { border-color:rgba(55,202,55,.2); background:rgba(55,202,55,.03); }
+    .check { width:26px; height:26px; background:rgba(55,202,55,.14); border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px; font-size:13px; color:var(--green); font-weight:700; }
+    .inc-text { font-size:15px; line-height:1.55; color:rgba(255,255,255,.78); }
+    .inc-text strong { color:#fff; }
+
+    /* PRICING */
+    .pricing-box { max-width:560px; margin:0 auto; background:#0d1117; border:1px solid rgba(55,202,55,.28); border-radius:20px; padding:48px 52px 56px; position:relative; overflow:hidden; }
+    .pricing-box::before { content:''; position:absolute; top:-60px; left:50%; transform:translateX(-50%); width:380px; height:180px; background:radial-gradient(ellipse,rgba(55,202,55,.1) 0%,transparent 70%); pointer-events:none; }
+    .pricing-tag { font-size:11px; font-weight:700; letter-spacing:1.8px; text-transform:uppercase; color:var(--green); margin-bottom:18px; }
+    .pricing-name { font-size:26px; font-weight:800; color:#fff; margin-bottom:24px; letter-spacing:-.03em; }
+    .price-row { display:flex; align-items:flex-end; gap:2px; margin-bottom:6px; }
+    .price-sym { font-size:22px; font-weight:700; color:rgba(255,255,255,.55); line-height:1; padding-bottom:12px; }
+    .price-int { font-size:82px; font-weight:900; color:#fff; letter-spacing:-.04em; line-height:1; }
+    .price-dec { font-size:42px; font-weight:900; color:rgba(255,255,255,.7); letter-spacing:-.03em; line-height:1; padding-bottom:8px; }
+    .price-note { font-size:13px; color:var(--muted); margin-bottom:32px; }
+    .feat-list { display:flex; flex-direction:column; gap:12px; margin-bottom:36px; }
+    .feat-item { display:flex; align-items:flex-start; gap:12px; }
+    .feat-check { color:var(--green); font-size:15px; flex-shrink:0; margin-top:1px; }
+    .feat-text { font-size:15px; color:rgba(255,255,255,.8); line-height:1.5; }
+
+    /* FAQ */
+    .faq-list { max-width:700px; margin:52px auto 0; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-q { width:100%; background:none; border:none; padding:22px 0; display:flex; justify-content:space-between; align-items:center; gap:16px; font-size:16px; font-weight:600; color:#fff; cursor:pointer; font-family:'Inter',sans-serif; text-align:left; transition:color .2s; }
+    .faq-q:hover { color:var(--green); }
+    .faq-icon { font-size:22px; color:var(--muted); transition:transform .3s; flex-shrink:0; display:inline-block; line-height:1; }
+    .faq-a { font-size:15px; line-height:1.65; color:var(--text2); max-height:0; overflow:hidden; transition:max-height .35s ease,padding .35s; }
+    .faq-item.open .faq-a { max-height:300px; padding-bottom:22px; }
+    .faq-item.open .faq-icon { transform:rotate(45deg); }
+    .faq-item.open .faq-q { color:var(--green); }
+
+    /* FOOTER */
+    footer { border-top:1px solid var(--border); padding:36px 24px; }
+    .footer-inner { max-width:var(--max); margin:0 auto; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+    .footer-logo { font-size:16px; font-weight:800; color:rgba(255,255,255,.65); }
+    .footer-logo span { color:var(--green); }
+    .footer-copy { font-size:13px; color:var(--muted); }
+
+    /* FADE IN */
+    .fi { opacity:0; transform:translateY(24px); transition:opacity .6s ease,transform .6s ease; }
+    .fi.vis { opacity:1; transform:translateY(0); }
+    .fi.d1 { transition-delay:.1s; } .fi.d2 { transition-delay:.2s; } .fi.d3 { transition-delay:.3s; }
+
+    /* RESPONSIVE */
+    @media(max-width:900px){
+      .hero-inner,.roles-grid,.steps-grid { grid-template-columns:1fr; }
+      .gallery-grid { grid-template-columns:1fr 1fr; }
+      .inc-grid { grid-template-columns:1fr; }
+      nav { padding:14px 20px; }
+      nav.scrolled { padding:10px 20px; }
+      .video-card { max-width:260px; }
+    }
+    @media(max-width:600px){
+      .gallery-grid { grid-template-columns:1fr 1fr; }
+      .pricing-box { padding:36px 28px 44px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-logo">Método Claude | <span>Hungsfield Pro</span></div>
+  <a href="#get" class="btn-green">Obtener el sistema</a>
+</nav>
+
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div class="hero-inner">
+      <div>
+        <div class="badge"><span class="dot"></span>Sistema de plantillas plug-and-play · Construido para Claude Code</div>
+        <h1>Una carpeta<br>convierte a<br>Claude en un<br><span class="grad">estudio de<br>producción<br>cinematográfica.</span></h1>
+        <p class="hero-sub">El primer sistema de automatización cinematográfica con IA que convierte a Claude en un motor de producción completo — planos consistentes, campaña tras campaña.</p>
+        <div class="cta-row">
+          <a href="#get" class="btn-green btn-green-lg">Obtener el sistema →</a>
+          <a class="link-muted" onclick="document.getElementById('como-funciona').scrollIntoView({behavior:'smooth'})">Ver cómo funciona ↓</a>
+        </div>
+      </div>
+      <div class="video-wrap">
+        <div class="video-card">
+          <video controls loop playsinline>
+            <source src="video1.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="runs-on">
+  <div class="wrap runs-inner">
+    <span class="runs-label">FUNCIONA CON</span>
+    <div style="display:flex;gap:28px;flex-wrap:wrap;">
+      <span class="runs-item">Higgsfield CLI</span>
+      <span class="runs-item">Seedance 2.0</span>
+      <span class="runs-item">Nano Banana</span>
+      <span class="runs-item">Claude Code</span>
+    </div>
+  </div>
+</div>
+
+<section id="resultados">
+  <div class="wrap">
+    <h2 class="fi" style="text-align:center">Resultados reales de este sistema</h2>
+    <p class="sec-sub fi d1" style="text-align:center;max-width:620px;margin:16px auto 0;">Cada fotograma fue creado con este sistema exacto — una campaña completa para una marca de fragancias, de principio a fin. Mismo modelo, mismo producto, mismo mundo, plano tras plano consistente.</p>
+    <div class="gallery-grid">
+      <div class="gal-item fi"><video src="videos/26.mp4" autoplay loop muted playsinline></video></div>
+      <div class="gal-item fi d1"><video src="videos/bear-chase.mp4" autoplay loop muted playsinline></video></div>
+      <div class="gal-item fi d2"><video src="videos/breaking-news.mp4" autoplay loop muted playsinline></video></div>
+      <div class="gal-item fi"><video src="videos/pitch-invasion.mp4" autoplay loop muted playsinline></video></div>
+      <div class="gal-item fi d1"><video src="videos/product-run.mp4" autoplay loop muted playsinline></video></div>
+      <div class="gal-item fi d2"><video src="videos/stream.mp4" autoplay loop muted playsinline></video></div>
+    </div>
+    <p class="gallery-caption">Fotogramas extraídos de los anuncios de 15 segundos con múltiples planos generados a través del sistema.</p>
+  </div>
+</section>
+
+<section class="sec-divider">
+  <div class="wrap">
+    <h2 class="problem-title fi">Generar cada plano a mano acabará contigo</h2>
+    <div class="prob-list">
+      <div class="prob-item fi"><div class="x-icon">✕</div><p class="prob-text"><strong>Tus personajes cambian entre planos.</strong> Caras, complexiones y vestuario varían de un fotograma al siguiente.</p></div>
+      <div class="prob-item fi d1"><div class="x-icon">✕</div><p class="prob-text"><strong>Tu producto héroe luce diferente en cada render.</strong> Color, forma, detalle — nada se mantiene igual.</p></div>
+      <div class="prob-item fi d2"><div class="x-icon">✕</div><p class="prob-text"><strong>Las imágenes de referencia se contaminan entre sí.</strong> La iluminación y el fondo se filtran por toda la escena.</p></div>
+      <div class="prob-item fi d3"><div class="x-icon">✕</div><p class="prob-text"><strong>Escribes, lanzas y rastreas cada prompt a mano.</strong> Sin registro, nada mejora.</p></div>
+    </div>
+    <p class="prob-closing fi">Un buen plano es una generación afortunada. Una campaña necesita docenas de ellos — consistentes, fieles a la marca, siempre. <span class="accent-blue">Eso no es un problema de prompts. Es un problema de producción.</span></p>
+  </div>
+</section>
+
+<section class="sec-divider">
+  <div class="wrap">
+    <h2 class="fi" style="text-align:center;max-width:700px;margin:0 auto 20px;">Es un pipeline de producción completo. En una carpeta.</h2>
+    <p class="sec-sub fi d1" style="text-align:center;max-width:560px;margin:0 auto 60px;">Claude asume tres roles a la vez — no es un generador puntual, es un motor de automatización cinematográfica que gestiona el trabajo completo de principio a fin.</p>
+    <div class="roles-grid">
+      <div class="role-card fi"><div class="role-num">ROL 01</div><div class="role-name">Ingeniero de Prompts</div><p class="role-desc">Escribe, refina y ejecuta los prompts para imágenes fijas y vídeo multi-plano. Tú das la dirección en lenguaje sencillo — él se encarga del craft del prompt.</p></div>
+      <div class="role-card fi d1"><div class="role-num">ROL 02</div><div class="role-name">Director de Producción</div><p class="role-desc">Ejecuta el Higgsfield CLI, captura tus UUIDs de referencia, organiza las carpetas de salida y mantiene actualizado el rastreador de planos.</p></div>
+      <div class="role-card fi d2"><div class="role-num">ROL 03</div><div class="role-name">Control de Calidad</div><p class="role-desc">Lee lo que llegó de vuelta, registra los fallos, aplica reescrituras seguras y sigue adelante hasta que el plano esté aprobado.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-divider" id="como-funciona">
+  <div class="wrap">
+    <h2 class="fi" style="text-align:center;max-width:700px;margin:0 auto 60px;">Tres movimientos de carpeta a footage</h2>
+    <div class="steps-grid">
+      <div class="step-card fi"><div class="step-big-num">01</div><div class="step-title">Agrégalo a tu proyecto</div><p class="step-desc">Añade la carpeta a Claude Code. Coloca tus imágenes de referencia en <code>model ref/</code>, <code>product ref/</code> y <code>environment ref/</code>.</p></div>
+      <div class="step-card fi d1"><div class="step-big-num">02</div><div class="step-title">Sigue el manual</div><p class="step-desc">Trabaja con el <code>INSTRUCTION-MANUAL.md</code>. Claude captura cada UUID de Higgsfield, escribe <code>ref-ids.md</code> y configura el pipeline completo.</p></div>
+      <div class="step-card fi d2"><div class="step-big-num">03</div><div class="step-title">Dirige la sesión</div><p class="step-desc">Da instrucciones como "El Modelo 1 sube el acantilado al atardecer." Claude lanza los prompts, lee los resultados e itera.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-divider" id="incluido">
+  <div class="wrap">
+    <h2 class="fi" style="text-align:center">Lo que recibes</h2>
+    <p class="sec-sub fi d1" style="text-align:center;max-width:520px;margin:14px auto 0;">Todo lo que necesitas para producir campañas cinematográficas con IA hoy mismo.</p>
+    <div class="inc-grid">
+      <div class="inc-item fi"><div class="check">✓</div><p class="inc-text"><strong>Sistema de plantillas completo</strong> — carpeta lista para usar con todos los workflows preconfigurados.</p></div>
+      <div class="inc-item fi d1"><div class="check">✓</div><p class="inc-text"><strong>Rastreador de planos</strong> — saber exactamente qué se generó, qué falló y qué fue aprobado.</p></div>
+      <div class="inc-item fi"><div class="check">✓</div><p class="inc-text"><strong>Gestión automática de UUIDs</strong> — referencias consistentes de personajes y producto sin configuración manual.</p></div>
+      <div class="inc-item fi d1"><div class="check">✓</div><p class="inc-text"><strong>Lógica de reescritura segura</strong> — Claude revisa los fallos y aplica correcciones sin romper la consistencia.</p></div>
+      <div class="inc-item fi"><div class="check">✓</div><p class="inc-text"><strong>Soporte multi-modelo</strong> — funciona con Higgsfield, Seedance 2.0, Nano Banana y Claude Code.</p></div>
+      <div class="inc-item fi d1"><div class="check">✓</div><p class="inc-text"><strong>Documentación completa</strong> — instrucciones en lenguaje simple para empezar sin curva de aprendizaje.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec-divider" id="get">
+  <div class="wrap">
+    <h2 class="fi" style="text-align:center;margin-bottom:52px;">Sé dueño del estudio</h2>
+    <div class="pricing-box fi">
+      <div class="pricing-tag">AUTOMATIZACIÓN CINEMATOGRÁFICA UNIVERSAL CON IA</div>
+      <div class="pricing-name">El sistema completo de plantillas con todas las indicaciones, guiones y videotutoriales.</div>
+      <div class="price-row">
+        <span class="price-sym">$</span>
+        <span class="price-int">87</span>
+        <span class="price-dec">,90</span>
+      </div>
+      <p class="price-note">Pago único · acceso inmediato · campañas ilimitadas</p>
+      <div class="feat-list">
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">18 imágenes de referencia de entorno — listas para usar</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">Dos años de conocimiento en prompts y frameworks para imagen y vídeo</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">El INSTRUCTION-MANUAL.md completo de 12 pasos</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">Plantillas de referencia, registro y mapa de fallos</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">El rastreador de planos CSV para Google Sheets</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">Barreras de seguridad de contenido y reescrituras seguras</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">Instrucciones de configuración del entorno de Higgsfield CLI</span></div>
+        <div class="feat-item"><span class="feat-check">✓</span><span class="feat-text">Acceso a todas las actualizaciones futuras del sistema</span></div>
+      </div>
+      <a href="#" id="buy-btn" class="btn-green" style="display:block;text-align:center;font-size:16px;padding:16px 44px;">Obtener el sistema por $87,90 →</a>
+      <p style="text-align:center;margin-top:14px;font-size:13px;color:var(--muted);">✦ Acceso instantáneo · Descarga directa · Sin suscripciones</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec-divider" id="faq">
+  <div class="wrap">
+    <h2 class="fi" style="text-align:center">Preguntas frecuentes</h2>
+    <div class="faq-list">
+      <div class="faq-item fi"><button class="faq-q">¿Necesito experiencia técnica para usar esto?<span class="faq-icon">+</span></button><div class="faq-a">No. Si puedes describir lo que quieres y tienes acceso a Claude, puedes usar este sistema. Toda la complejidad técnica está manejada por la carpeta de plantillas.</div></div>
+      <div class="faq-item fi"><button class="faq-q">¿Qué herramientas necesito además de este sistema?<span class="faq-icon">+</span></button><div class="faq-a">Necesitas Claude (Pro o API) y acceso a al menos una plataforma soportada: Higgsfield CLI, Seedance 2.0 o Nano Banana.</div></div>
+      <div class="faq-item fi"><button class="faq-q">¿Qué tipo de contenido puedo crear?<span class="faq-icon">+</span></button><div class="faq-a">El sistema está optimizado para campañas de producto, anuncios de 15 segundos con múltiples planos y contenido cinematográfico de marca. Funciona tanto con imágenes fijas como con vídeo.</div></div>
+      <div class="faq-item fi"><button class="faq-q">¿Cómo mantiene el sistema la consistencia entre planos?<span class="faq-icon">+</span></button><div class="faq-a">El sistema gestiona automáticamente los UUIDs de referencia para personajes y productos, garantizando que el mismo modelo y artículo aparezcan idénticos en todos los fotogramas.</div></div>
+      <div class="faq-item fi"><button class="faq-q">¿Incluye actualizaciones futuras?<span class="faq-icon">+</span></button><div class="faq-a">Sí. Una compra incluye todas las actualizaciones futuras. A medida que añadamos soporte para nuevas plataformas, recibirás esas mejoras sin costo adicional.</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">Método Claude | <span>Hungsfield Pro</span></div>
+    <p class="footer-copy">© 2026 Rourke Heath · Automatización Cinematográfica Universal con IA</p>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 40), {passive:true});
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('vis'); obs.unobserve(e.target); } });
+  }, {threshold:.1, rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.fi').forEach(el => obs.observe(el));
+  document.querySelectorAll('.faq-q').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if(!isOpen) item.classList.add('open');
+    });
+  });
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
+    });
+  });
+</script>
+</body>
+</html>
