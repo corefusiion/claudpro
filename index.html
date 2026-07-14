@@ -169,6 +169,20 @@
       .btn-green { padding:8px 16px; font-size:12px; }
       .btn-green-lg { padding:14px 28px; font-size:15px; }
     }
+
+    /* MODALS */
+    .modal-overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); backdrop-filter:blur(5px); z-index:999; display:none; justify-content:center; align-items:center; opacity:0; transition:opacity .3s; }
+    .modal-overlay.active { display:flex; opacity:1; }
+    .modal-box { background:var(--bg); border:1px solid var(--border); border-radius:16px; width:90%; max-width:800px; max-height:85vh; overflow-y:auto; padding:40px; position:relative; transform:translateY(20px); transition:transform .3s; }
+    .modal-overlay.active .modal-box { transform:translateY(0); }
+    .modal-close { position:absolute; top:20px; right:20px; background:none; border:none; color:var(--text); font-size:24px; cursor:pointer; opacity:0.7; }
+    .modal-close:hover { opacity:1; }
+    .modal-content h3 { font-size:24px; margin-bottom:20px; }
+    .modal-content h4 { font-size:18px; margin:20px 0 10px; color:var(--green); }
+    .modal-content p { font-size:14px; line-height:1.6; margin-bottom:15px; color:var(--text2); }
+    .footer-links { margin-top:12px; font-size:13px; color:var(--muted); display:flex; gap:12px; justify-content:center; width:100%; }
+    .footer-links a { cursor:pointer; transition:color .2s; }
+    .footer-links a:hover { color:var(--green); }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -342,6 +356,11 @@
   <div class="footer-inner">
     <div class="footer-logo">Método Claude | <span>Hungsfield Pro</span></div>
     <p class="footer-copy">© 2026 Rourke Heath · Automatización Cinematográfica Universal con IA</p>
+    <div class="footer-links">
+      <a onclick="openModal('modal-termos')">Condiciones de uso</a>
+      <span>|</span>
+      <a onclick="openModal('modal-privacidade')">Política de privacidad</a>
+    </div>
   </div>
 </footer>
 
@@ -366,6 +385,107 @@
       if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth'}); }
     });
   });
+
+  function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    setTimeout(() => document.getElementById(id).classList.add('active'), 10);
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove('active');
+    setTimeout(() => {
+      document.getElementById(id).style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 300);
+  }
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', e => {
+      if(e.target === overlay) closeModal(overlay.id);
+    });
+  });
 </script>
+
+<!-- MODALS -->
+<div class="modal-overlay" id="modal-termos">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-termos')">✕</button>
+    <div class="modal-content">
+      <h3>Términos de Uso</h3>
+      <p>LEA ATENTAMENTE ESTOS TÉRMINOS DE USO ANTES DE UTILIZAR ESTE SITIO WEB. Al utilizar este sitio web, usted acepta estos términos de uso. Si no está de acuerdo con estos Términos de Uso, no utilice el sitio web.</p>
+      <p>Su acceso y uso de este sitio web, así como de todos los sitios web relacionados operados por Método Claude | Hungsfield Pro (que incluyen genhq.io, entre otros) (en adelante, el "Sitio"), están sujetos a los siguientes términos y condiciones ("Términos de Uso") y a todas las leyes aplicables. Al acceder y navegar por el Sitio, usted acepta, sin limitación ni reserva, los Términos de Uso y reconoce que cualquier otro acuerdo entre usted y el Sitio queda sin efecto:</p>
+      <p>1. Usted acepta que el Sitio, así como todo el contenido, videos, materiales de capacitación, productos, servicios y/u otros materiales disponibles en el Sitio, ya sea por nosotros o por terceros, así como la apariencia de todo lo anterior (en adelante, el "Contenido"), son mantenidos para su uso personal e informativo por Método Claude | Hungsfield Pro (la "Compañía") y son propiedad de la Compañía y/o sus proveedores externos. Usted acepta que dicho Contenido de la Compañía incluye todos los videos, HTML/CSS, JavaScript, gráficos, grabaciones de voz y sonido, ilustraciones, fotografías, documentos y textos de propiedad exclusiva, así como todos los demás materiales incluidos en el Sitio, con la única excepción de los materiales que usted proporcione. Sujeto al cumplimiento de estos Términos de Uso, la Compañía le otorga una licencia limitada, no exclusiva, intransferible y no sublicenciable, para acceder, visualizar y usar el Sitio únicamente para fines personales. Ningún Contenido de la Compañía podrá ser copiado, reproducido, republicado, cargado, publicado, transmitido, distribuido, utilizado con fines públicos o comerciales, ni descargado de ninguna manera, a menos que la Compañía otorgue permiso expreso por escrito. La modificación del Contenido o su uso para cualquier otro fin constituye una violación de los derechos de autor y otros derechos de propiedad de la Compañía, así como de los demás autores que crearon los materiales, y puede estar sujeta a indemnizaciones y sanciones económicas. No podrá distribuir, modificar, transmitir ni usar el contenido del Sitio ni ningún otro Contenido, incluyendo software, herramientas, gráficos y/o archivos de sonido, con fines públicos o comerciales sin el permiso expreso por escrito de la Compañía.</p>
+      <p>2. Todo el contenido, como texto, datos, archivos gráficos, vídeos, archivos de audio y demás materiales incluidos en el Sitio, está protegido por derechos de autor, salvo que se indique lo contrario, y es propiedad de la Compañía o de un proveedor de la misma. Dichos materiales no podrán utilizarse salvo en los casos previstos en estas Condiciones de Uso.</p>
+      <p>3. Todos los nombres comerciales, marcas registradas, imágenes e información biográfica de personas utilizadas en el contenido de la Compañía y que aparecen en el Sitio, incluyendo, entre otros, el nombre y la marca registrada «Método Claude | Hungsfield Pro», son propiedad de la Compañía o se utilizan con su autorización. El uso del contenido por parte del usuario está estrictamente prohibido, salvo que estas Condiciones de Uso lo permitan expresamente. Cualquier uso no autorizado del contenido puede infringir los derechos de autor, marcas registradas y otros derechos de propiedad intelectual de la Compañía o de terceros, así como las leyes de privacidad y publicidad, y demás normativas y leyes aplicables. Nada de lo contenido en este Acuerdo o en el Sitio se interpretará como una concesión, implícita o explícita, de licencia o derecho alguno para utilizar cualquier marca registrada u otra información de propiedad intelectual sin el consentimiento expreso por escrito de la Compañía o del tercero propietario. La Compañía respeta los derechos de autor, marcas registradas y demás derechos de propiedad intelectual de terceros. La Compañía tiene el derecho, pero no la obligación, de eliminar contenido y cuentas que contengan material que, a su entera discreción, considere ilegal, ofensivo, amenazante, calumnioso, difamatorio, pornográfico, obsceno o de cualquier otro modo objetable, o que infrinja la propiedad intelectual de terceros o las presentes Condiciones de Uso. Si considera que sus derechos de propiedad intelectual están siendo infringidos o que alguna obra suya ha sido reproducida en el Sitio o en cualquier Contenido, puede notificarlo a la Compañía a través de glfx20@gmail.com. Indique su nombre y datos de contacto, la naturaleza de su obra y cómo se está infringiendo, toda la información relevante sobre el registro de derechos de autor o marcas registradas, la ubicación/URL de la infracción y cualquier otra información que considere pertinente.</p>
+      <p>4. Si bien la Compañía se esfuerza por incluir información precisa y actualizada en el Sitio, no ofrece garantías ni declaraciones sobre su exactitud. La Compañía no asume ninguna responsabilidad por errores u omisiones en el contenido del Sitio.</p>
+      <p>5. Al registrarse en la Compañía y/o en este Sitio, usted acepta expresamente recibir avisos, anuncios, acuerdos, divulgaciones, informes, documentos, comunicaciones sobre nuevos productos o servicios, u otros registros o correspondencia de la Compañía. Usted acepta recibir notificaciones electrónicamente mediante transferencia.</p>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-privacidade">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('modal-privacidade')">✕</button>
+    <div class="modal-content">
+      <h3>Política de Privacidad</h3>
+      <h4>1. WHO WE ARE</h4>
+      <p>Método Claude | Hungsfield Pro ("Método Claude | Hungsfield Pro," "we," "us," or "our") is an online community and education platform providing training, resources, and community access for entrepreneurs and business owners.</p>
+      <p>Data Controller: Método Claude | Hungsfield Pro The Great Barn, Wilton Park, Beaconsfield, HP9 2WH, United Kingdom Email: glfx20@gmail.com</p>
+
+      <h4>2. INFORMATION WE COLLECT</h4>
+      <p><strong>A. Information You Provide Directly</strong><br>Account/Registration Data: Name, email address, username, and password when you create an account or join our Skool community.<br>Profile Information: Any biography, photo, location, or other details you add to your profile.<br>Payment Information: Processed by our third-party payment processor (e.g., Stripe). We do not store full credit card numbers.<br>Communications: Messages, emails, support requests, survey responses, or feedback you send us.<br>Community Content: Posts, comments, questions, or other content you submit within our community.<br>Course/Program Participation: Enrollment data, course progress, and completion records.</p>
+      <p><strong>B. Information Collected Automatically</strong><br>Usage Data: Pages viewed, links clicked, features accessed, and time spent on our platforms.<br>Device & Technical Data: IP address, browser type, operating system, device identifiers, and referring URLs.<br>Cookies & Similar Technologies: See Section 6 for details.<br>Email Engagement Data: Whether you open emails we send and which links you click.</p>
+      <p><strong>C. Information from Third Parties</strong><br>Platform Data: Information from Skool about your membership and activity.<br>Payment Processors: Transaction confirmation and billing status from processors like Stripe.<br>Marketing & Analytics Platforms: Data from Meta (Facebook/Instagram), Google, or email service providers.<br>Referrals: Information provided by others who refer you to our community.</p>
+
+      <h4>3. HOW WE USE YOUR INFORMATION</h4>
+      <p>We use the information we collect to:<br>- Create and manage your account and membership<br>- Deliver courses, content, community access, and services you've enrolled in or purchased<br>- Process payments and send transaction confirmations<br>- Send emails, newsletters, program updates, and promotional communications (where you have opted in or where permitted by law)<br>- Respond to your questions, comments, or support requests<br>- Improve our platform, content, and user experience through analytics<br>- Personalize your experience and deliver relevant content<br>- Run advertising campaigns on platforms such as Facebook, Instagram, and Google<br>- Comply with legal obligations and enforce our Terms of Service<br>- Detect and prevent fraud, abuse, or security incidents</p>
+      <p><strong>B. Use of Community Content for Marketing and Advertising</strong><br>By posting content within the Método Claude | Hungsfield Pro community — including written posts, comments, photos, videos, testimonials, results, or other submissions — you grant Método Claude | Hungsfield Pro a non-exclusive, royalty-free, worldwide, perpetual license to use, reproduce, adapt, publish, and display that content across our marketing channels, including but not limited to social media platforms (Facebook, Instagram, TikTok, YouTube), paid advertising campaigns, email marketing, website pages, and promotional materials.</p>
+      <p>We will never misrepresent your results or words. Where reasonably practicable, we will credit you or seek your approval before using your content in paid advertising. You may withdraw this permission at any time by contacting glfx20@gmail.com, though this will not affect any prior use.</p>
+
+      <h4>4. LEGAL BASIS FOR PROCESSING (GDPR / UK GDPR)</h4>
+      <p>If you are located in the European Economic Area (EEA) or the United Kingdom, we process your personal data only when we have a valid legal basis:<br>Contract Performance: Processing necessary to fulfill your membership or purchase.<br>Legitimate Interests: Processing for our legitimate business interests, such as improving our services or preventing fraud, where your rights do not override ours.<br>Consent: Where you have given clear, specific consent — such as subscribing to our email list. You may withdraw consent at any time.<br>Legal Obligation: Processing required to comply with applicable law or regulatory requirements.</p>
+
+      <h4>5. HOW WE SHARE YOUR INFORMATION</h4>
+      <p>We do not sell your personal information. We may share your information with:</p>
+      <p><strong>A. Service Providers</strong><br>- Skool – Community hosting platform<br>- Stripe – Secure payment processing<br>- GoHighLevel / Email Marketing Platform – Email and CRM automation<br>- Meta (Facebook/Instagram) – Advertising and audience management<br>- Google Analytics / Google Ads – Analytics and advertising<br>- Zoom or similar video platforms – Live sessions and webinars<br>These providers are contractually required to use your data only to perform services for us.</p>
+      <p><strong>B. Business Transfers</strong><br>If Método Claude | Hungsfield Pro is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you if this occurs.</p>
+      <p><strong>C. Legal Requirements</strong><br>We may disclose your information if required by law, court order, or government authority, or to protect the rights and safety of Método Claude | Hungsfield Pro, our members, or the public.</p>
+      <p><strong>D. With Your Consent</strong><br>We may share your information for other purposes when we have obtained your explicit consent.</p>
+
+      <h4>6. COOKIES AND TRACKING TECHNOLOGIES</h4>
+      <p>We and our third-party partners use cookies, pixels, and similar tracking technologies to:<br>- Keep you logged in and remember your preferences<br>- Understand how you use our content and community<br>- Measure the effectiveness of our advertising<br>- Deliver personalized advertising across the web</p>
+      <p>Types of Cookies:<br>Essential Cookies: Required for core functionality. Cannot be disabled.<br>Analytics Cookies: Help us understand usage patterns (e.g., Google Analytics).<br>Marketing/Advertising Cookies: Track ad performance and retargeting (e.g., Meta Pixel, Google Ads).<br>Preference Cookies: Remember your settings.<br>EU/UK users: Non-essential cookies will only be set with your consent. You can manage cookies through your browser settings at any time. For more information, visit allaboutcookies.org.</p>
+
+      <h4>7. EMAIL COMMUNICATIONS</h4>
+      <p>By joining our community or purchasing from us, you may receive transactional emails (receipts, account notices) and, where you have opted in, marketing emails (newsletters, promotions, updates).<br>You can unsubscribe at any time by clicking the "Unsubscribe" link in any marketing email or by emailing glfx20@gmail.com.<br>Transactional emails related to your account or purchases may not be opted out of while your account is active.<br>We comply with the CAN-SPAM Act (US), CASL (Canada), and UK/EU GDPR email marketing rules.</p>
+
+      <h4>8. DATA RETENTION</h4>
+      <p>We retain your personal information for as long as your account is active or as needed to provide our services, and as required by law (e.g., financial records are typically retained for 6–7 years under UK law). When data is no longer needed, we securely delete or anonymize it.</p>
+
+      <h4>9. SECURITY</h4>
+      <p>We implement commercially reasonable technical and organizational security measures to protect your personal information. However, no method of internet transmission is 100% secure. In the event of a data breach affecting your rights, we will notify you as required by applicable law.</p>
+
+      <h4>10. INTERNATIONAL DATA TRANSFERS</h4>
+      <p>Método Claude | Hungsfield Pro is based in the United Kingdom. If you are accessing our services from outside the UK — including from the EU, US, Canada, or Australia — your information may be transferred to and processed in countries with different data protection laws. For transfers from the EU/EEA, we rely on Standard Contractual Clauses (SCCs) or other appropriate safeguards as required by applicable law.</p>
+
+      <h4>11. YOUR RIGHTS – EU, UK, AND EEA RESIDENTS (GDPR / UK GDPR)</h4>
+      <p>You have the right to:<br>Access: Request a copy of the personal data we hold about you.<br>Rectification: Request correction of inaccurate or incomplete data.<br>Erasure: Request deletion of your personal data ("right to be forgotten"), subject to legal limitations.<br>Restrict Processing: Request that we limit how we use your data in certain circumstances.<br>Data Portability: Receive your data in a structured, machine-readable format.<br>Object: Object to processing based on legitimate interests or for direct marketing.<br>Withdraw Consent: Where processing is based on consent, withdraw it at any time.<br>To exercise any of these rights, email glfx20@gmail.com. We will respond within 30 days. You may also lodge a complaint with:<br>UK: Information Commissioner's Office (ICO) – ico.org.uk<br>EU: Your national data protection authority (edpb.europa.eu)</p>
+
+      <h4>12. YOUR RIGHTS – CALIFORNIA RESIDENTS (CCPA / CPRA)</h4>
+      <p>California residents have the right to:<br>Know: Request disclosure of the personal information we've collected, its sources, purposes, and with whom it's shared.<br>Delete: Request deletion of your personal information, subject to certain exceptions.<br>Correct: Request correction of inaccurate personal information.<br>Opt Out of Sale: We do not sell personal information.<br>Non-Discrimination: We will not discriminate against you for exercising your rights.<br>Categories of personal information collected: Identifiers (name, email, IP address); internet activity (browsing, community interactions); commercial information (purchase history); inferences drawn from the above.<br>To submit a request, email glfx20@gmail.com with the subject line "California Privacy Request." We will respond within 45 days.</p>
+
+      <h4>13. YOUR RIGHTS – CANADA AND AUSTRALIA</h4>
+      <p>Canada (PIPEDA / Quebec Law 25): You may request access to or correction of your personal data and withdraw consent at any time. Quebec residents have additional rights including data portability and the right to be forgotten.<br>Australia (Privacy Act 1988): You may request access to or correction of your personal information. If unsatisfied with our response, you may contact the Office of the Australian Information Commissioner at oaic.gov.au.<br>Contact us at glfx20@gmail.com for any of the above requests.</p>
+
+      <h4>14. CHILDREN'S PRIVACY</h4>
+      <p>Our services are not directed to individuals under the age of 16. We do not knowingly collect personal information from children. If you believe we have done so inadvertently, please contact glfx20@gmail.com and we will delete the information promptly.</p>
+
+      <h4>15. THIRD-PARTY LINKS AND SERVICES</h4>
+      <p>Our community and communications may contain links to third-party websites. We are not responsible for their privacy practices. Our use of Skool means Skool's own Privacy Policy also applies — please review it at skool.com/privacy.</p>
+
+      <h4>16. CHANGES TO THIS POLICY</h4>
+      <p>We may update this Privacy Policy from time to time. When we make material changes, we will update the "Last Updated" date and notify you via email or prominent notice in our community. Continued use of our services constitutes acceptance of the updated policy.</p>
+    </div>
+  </div>
+</div>
 </body>
 </html>
